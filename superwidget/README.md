@@ -14,7 +14,6 @@ To get started, you must first include the following script tag right after the 
   js.src= 'http://superwidget.gowatchit.com/gwi.js';
 
   GWI.config.apiKey = 'YOUR_API_KEY';
-  GWI.config.theme = 'default';
 
   _s.parentNode.insertBefore(js, _s);
 }(document, 'script', 'gwijslib'));
@@ -127,7 +126,7 @@ Required options:
 Optional Parameters:
 - categories - 3 or 5
 - layout - 'tabs', 'accordion', or 'panels'
-- blowup - A DOM element that will act as the starting point of the Modal animation.
+- animate - A DOM element that will act as the starting point of the Modal animation.
 
 Example Code:
 
@@ -140,7 +139,7 @@ window.goWatchItReady = function() {
         type: 'movie',
         id: 1862,
         flavor: 'availability',
-        blowup: element
+        animate: element
       })
     })
   })
