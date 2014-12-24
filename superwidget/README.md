@@ -114,6 +114,12 @@ window.goWatchItReady = function() {
 
 ```
 
+*Note:* Some of the sample code uses [jQuery](http://jquery.com), a popular javascript library, to simplify things. If you are testing out these examples on your own, you must include jQuery on your page by placing this within your head tag:
+
+```
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+```
+
 ## GWI.showModal
 
 You can programatically call GWI.showModal(<options>) to render the modal version of the widget. GWI.showModal accepts one parameter, which is a javascript object of options.
@@ -238,7 +244,7 @@ HTML
 
 # Simple Button
 
-If you are going to render multiple widgets on a single page, then you should use this simple button implementation, which is much more lightweight than the above examples and will not hamper performance. To see an example of a use case where the simple button should be used, go to wheretowatch.com and hover over movie and TV show posters.
+If you are going to render multiple widgets on a single page, then you should use this simple button implementation, which is much more lightweight than the above examples and will not hamper performance. To see an example of a use case where the simple button should be used, go to [wheretowatch.com](http://wheretowatch.com) and hover over movie and TV show posters to see them in action.
 
 This is done using the GWI.showButton(element, <options>) function. GWI.showButton takes two parameters, a required DOM element to be replaced by the widget, and a javascript object of options.
 
