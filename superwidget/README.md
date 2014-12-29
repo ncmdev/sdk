@@ -122,7 +122,7 @@ window.goWatchItReady = function() {
 
 ## GWI.showModal
 
-You can programatically call GWI.showModal(<options>) to render the modal version of the widget. GWI.showModal accepts one parameter, which is a javascript object of options.
+You can programatically call GWI.showModal(options) to render the modal version of the widget. GWI.showModal accepts one parameter, which is a javascript object of options.
 
 Required options:
 - type - 'movie', 'show', 'season', or 'episode'
@@ -158,7 +158,7 @@ That above code snippet will trigger the modal whenever the element with id 'my-
 
 ### Alert
 
-If you wish to display the embed button of the alert button, use the GWI.display(element, <options>) call. GWI.display takes two parameters, a DOM element to be replaced by the embed button (required), and a javascript object of options. If no options are passed, then the SDK will take the data from the html element, similar to how the HTML embed tag works.
+If you wish to display the embed button of the alert button, use the GWI.display(element, options) call. GWI.display takes two parameters, a DOM element to be replaced by the embed button (required), and a javascript object of options. If no options are passed, then the SDK will take the data from the html element, similar to how the HTML embed tag works.
 
 Required options:
 - type - 'movie', 'show', 'season', or 'episode'
@@ -246,7 +246,7 @@ HTML
 
 If you are going to render multiple widgets on a single page, then you should use this simple button implementation, which is much more lightweight than the above examples and will not hamper performance. To see an example of a use case where the simple button should be used, go to [wheretowatch.com](http://wheretowatch.com) and hover over movie and TV show posters to see them in action.
 
-This is done using the GWI.showButton(element, <options>) function. GWI.showButton takes two parameters, a required DOM element to be replaced by the widget, and a javascript object of options.
+This is done using the GWI.showButton(element, options) function. GWI.showButton takes two parameters, a required DOM element to be replaced by the widget, and a javascript object of options.
 
 Required options:
 - type - 'movie', 'show', 'season', or 'episode'
