@@ -38,12 +38,12 @@ There are some options that you can specify in your global config as well as on 
 - layout: Acceptable Values: 'tabs', 'accordion', 'panels' (default: 'tabs')
   - Specify the layout of the availability flavor. The tabs layout will display each category in a tab, the accordion layout will display each category on top of one another, and only one is visible at a given time, and 'panels' will display all services in each category.
 
-- display: Acceptable Values: 'modal-button', 'inline' (default: 'modal-button')
-  - Specify how to display the widget. The 'modal-button' display setting will display a button that when clicked will display a modal. The 'inline' display setting will display the widget within the given html DOM element.
+- render: Acceptable Values: 'inline', 'power-button', 'simple-button' (default: 'power-button')
+  - Specify how to render the widget. The 'inline' render setting will display the widget within the given html DOM element. The 'power-button' render setting will display a button that when clicked will display a modal. The 'simple-button' render setting will display a stripped-down version of the button. (N/A for some flavors.)
 
 # HTML Embed
 
-Our HTML Embed tags are the simplest way to include the GoWatchIt widget on your webpage. 
+Our HTML Embed tags are the simplest way to include the GoWatchIt widget on your webpage.
 
 ## Buttons
 
@@ -52,7 +52,7 @@ Our HTML Embed tags are the simplest way to include the GoWatchIt widget on your
 To include the alert widget on your webpage and to display it as a button that will trigger a modal, just place the following div into your page:
 
 ```
-<div class='gwi-widget' data-flavor='alert' data-type='movie' data-id='1862' data-display='modal-button'></div>
+<div class='gwi-widget' data-flavor='alert' data-type='movie' data-id='1862' data-render='power-button'></div>
 ```
 
 Where the type is either 'movie', 'show', 'season', or 'episode', and the id is the corresponding GoWatchIt ID.
@@ -64,7 +64,7 @@ Where the type is either 'movie', 'show', 'season', or 'episode', and the id is 
 To include the availability widget on your webpage and to display it as a button that will trigger a modal, place the following div into your page:
 
 ```
-<div class='gwi-widget' data-flavor='availability' data-type='movie' data-id='1862' data-display='modal-button'></div>
+<div class='gwi-widget' data-flavor='availability' data-type='movie' data-id='1862' data-render='power-button'></div>
 ```
 
 ### Simple Link
@@ -74,10 +74,8 @@ To include the availability widget on your webpage and to display it as a button
 To render a GoWatchIt-branded button that when clicked will take you to the GoWatchIt movie page, place the following div into your page:
 
 ```
-<div class='gwi-widget' data-flavor='link' data-type='movie' data-id='1862'></div>
+<div class='gwi-widget' data-flavor='link' data-type='movie' data-id='1862' data-render='simple-button'></div>
 ```
-
-Note: The link flavor will always render as a button, and therefore the display attribute does not need to be included.
 
 ## Rendering Widgets In Place
 
@@ -85,19 +83,19 @@ Note: The link flavor will always render as a button, and therefore the display 
 
 ### Alert
 
-To display the alert module within a given div, specify the display attribute as 'inline':
+To display the alert module within a given div, specify the render attribute as 'inline':
 
 ```
-<div class='gwi-widget' data-flavor='alert' data-type='movie' data-id='1862' data-display='inline'></div>
+<div class='gwi-widget' data-flavor='alert' data-type='movie' data-id='1862' data-render='inline'></div>
 
 ```
 
 ### Availability
 
-To display a given movie or TV show's availability information within a given div, specify the display attribute as 'inline':
+To display a given movie or TV show's availability information within a given div, specify the render attribute as 'inline':
 
 ```
-<div class='gwi-widget' data-flavor='availability' data-type='movie' data-id='1862' data-display='inline'></div>
+<div class='gwi-widget' data-flavor='availability' data-type='movie' data-id='1862' data-render='inline'></div>
 
 ```
 
@@ -166,7 +164,7 @@ Required options:
 - flavor - 'alert'
 
 Optional Options:
-- display - 'modal-button' or 'inline' (Currently only modal-button is supported.)
+- render - 'inline', button', 'simple-button' (render: 'inline' not yet supported)
 
 Example Code:
 
@@ -181,7 +179,7 @@ window.goWatchItReady = function() {
       type: 'movie',
       id: 1862,
       flavor: 'alert',
-      display: 'modal-button'
+      render: 'power-button'
     });
   })
 }
@@ -213,7 +211,7 @@ Required options:
 - flavor - 'availability'
 
 Optional Options:
-- display - 'modal-button' or 'inline'
+- render - 'inline', 'power-button'
 - categories - 3 or 5
 - layout - 'tabs', 'accordion', or 'panels'
 
@@ -230,7 +228,7 @@ window.goWatchItReady = function() {
       type: 'movie',
       id: 1862,
       flavor: 'availability',
-      display: 'modal-button'
+      render: 'power-button'
     });
   })
 }
@@ -246,7 +244,7 @@ HTML
 
 If you are going to render multiple widgets on a single page, then you should use this simple button implementation, which is much more lightweight than the above examples and will not hamper performance. To see an example of a use case where the simple button should be used, go to [wheretowatch.com](http://wheretowatch.com) and hover over movie and TV show posters to see them in action.
 
-This is done using the GWI.showButton(element, options) function. GWI.showButton takes two parameters, a required DOM element to be replaced by the widget, and a javascript object of options.
+This is done by setting the render attribute to 'simple-button'.
 
 Required options:
 - type - 'movie', 'show', 'season', or 'episode'
@@ -254,52 +252,9 @@ Required options:
 - flavor - 'availability' or 'alert'
 
 Optional Parameters:
+- render - 'simple-button'
 - categories - 3 or 5
 - layout - 'tabs', 'accordion', or 'panels'
-
-## Availability
-
-```
-JS
----
-
-window.goWatchItReady = function() {
-  $(document).ready(function() {
-    var element = $('#my-gwi-widget-button').get(0);
-    GWI.showButton(element, {
-      type: 'movie',
-      id: 1862,
-      flavor: 'availability'
-    });
-  })
-}
-
-
-HTML
----
-
-<div id="my-gwi-widget-button"></div>
-```
-
-Again, if no options are passed, then the SDK will take the data on the DOM element.
-
-```
-JS
----
-
-window.goWatchItReady = function() {
-  $(document).ready(function() {
-    var element = $('#my-gwi-widget-button').get(0);
-    GWI.showButton(element);
-  })
-}
-
-
-HTML
----
-
-<div id="my-gwi-widget-button" data-type='movie' data-id='1862' data-flavor='availability'></div>
-```
 
 
 ## Alert
@@ -312,10 +267,11 @@ JS
 window.goWatchItReady = function() {
   $(document).ready(function() {
     var element = $('#my-gwi-widget-button').get(0);
-    GWI.showButton(element, {
+    GWI.display(element, {
       type: 'movie',
       id: 1862,
-      flavor: 'alert'
+      flavor: 'alert',
+      render: 'simple-button'
     });
   })
 }
@@ -338,10 +294,11 @@ JS
 window.goWatchItReady = function() {
   $(document).ready(function() {
     var element = $('#my-gwi-widget-button').get(0);
-    GWI.showButton(element, {
+    GWI.display(element, {
       type: 'movie',
       id: 1862,
-      flavor: 'link'
+      flavor: 'link',
+      render: 'simple-button'
     });
   })
 }
